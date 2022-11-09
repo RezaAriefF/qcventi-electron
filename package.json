@@ -12,6 +12,7 @@
     "electron": "^21.1.0"
   },
   "dependencies": {
+    "jquery": "^3.6.1",
     "serialport": "^10.4.0"
   }
 }

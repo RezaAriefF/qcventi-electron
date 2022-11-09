@@ -10,6 +10,17 @@ const createWindow = () => {
       contextIsolation: false,
     },
   });
+  // win.webContents.session.on(
+  //   "select-serial-port",
+  //   (event, portList, webContents, callback) => {
+  //     win.webContents.session.on("serial-port-added", (event, port) => {
+  //       alert("WANJIR MASUK");
+  //     });
+  //     win.webContents.session.on("serial-port-removed", (event, port) => {
+  //       alert("WANJIR METU");
+  //     });
+  //   }
+  // );
   win.maximize();
   win.loadFile("index.html");
 };

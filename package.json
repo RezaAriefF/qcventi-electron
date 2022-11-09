@@ -1,0 +1,17 @@
+{
+  "name": "tes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^21.1.0"
+  },
+  "dependencies": {
+    "serialport": "^10.4.0"
+  }
+}

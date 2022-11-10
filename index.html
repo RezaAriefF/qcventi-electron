@@ -54,7 +54,7 @@
   </div>
   <section class="home-section">
     <div class="text">QUALITY CONTROL VENTILATOR</div>
-    <img src="assets/logo_stechoq.png" class="stechoq" />
+    <!-- <img src="assets/logo_stechoq.png" class="stechoq" /> -->
     <!-- left area -->
     <div class="left-area">
       <!-- Flow Sensor -->
@@ -79,55 +79,61 @@
     <!-- end of left area -->
 
     <!-- right area -->
-    <!-- Flow Area -->
-    <div class="flow">
-      <div class="container-output">
-        <div class="title-sensor">Flow Sensor Output</div>
-        <div class="sensor-output">
-          <div class="value">
-            <div id="sFlow">0</div>
+    <div class="right-area">
+      <!-- Flow Area -->
+      <div class="flow">
+        <div class="container-output">
+          <div class="title-sensor">Flow Sensor Output</div>
+          <div class="sensor-output">
+            <div class="value">
+              <div id="sFlow">0</div>
+            </div>
+            <div class="unit-output">L/min</div>
           </div>
-          <div class="unit-output">L/min</div>
         </div>
       </div>
-    </div>
-    <!-- end of Flow Area -->
+      <!-- end of Flow Area -->
 
-    <!-- Sensor Input -->
-    <div class="container-output">
-      <div class="title-sensor">Pressure</div>
-      <input type="number" max="500" min="0" id="inPressure" /> <br />
-      <a>Enter a number to target the value that will be the limit to be
-        achieved by the pressure sensor so that when the pressure sensor
-        reaches that value it will automatically return to the initial value
-        or 0 mbar and return to work to achieve the target repeatedly</a>
-    </div>
-    <!-- end Sensor Input -->
+      <!-- Sensor Input -->
+      <div class="container-input">
+        <div class="title-sensor">PEEP</div>
+        <input type="number" max="6" min="1" id="inPeep" /> <br />
+        <a>Enter the target value as desired so that the pressure sensor is used to become the target to be achieved and
+          keep repeating until that target.</a>
+      </div>
+      <div class="container-input">
+        <div class="title-sensor">Pressure Target</div>
+        <input type="number" max="450" min="1" id="inPressure" /> <br />
+        <a>Enter the target value as desired so that the pressure sensor is used to become the target to be achieved and
+          keep repeating until that target.</a>
+      </div>
+      <!-- end Sensor Input -->
 
-    <!-- Start Button -->
-    <div class="container-output">
-      <button type="button" onclick="chartFunction()">
-        <div class="title-sensor">
-          <div class="text-start" id="pressureBtn">START</div>
-        </div>
-      </button>
-    </div>
-
-    <!-- end of Start Button -->
-
-    <!-- Pressure Sensor -->
-    <div class="pressure">
+      <!-- Start Button -->
       <div class="container-output">
-        <div class="title-sensor">Pressure Sensor Output</div>
-        <div class="sensor-output">
-          <div class="value">
-            <div id="sPressure">0</div>
+        <button type="button" onclick="chartFunction()">
+          <div class="title-sensor">
+            <div class="text-start" id="pressureBtn">START</div>
           </div>
-          <div class="unit-output">cmH2o</div>
+        </button>
+      </div>
+
+      <!-- end of Start Button -->
+
+      <!-- Pressure Sensor -->
+      <div class="pressure">
+        <div class="container-output">
+          <div class="title-sensor">Pressure Sensor Output</div>
+          <div class="sensor-output">
+            <div class="value">
+              <div id="sPressure">0</div>
+            </div>
+            <div class="unit-output">cmH2o</div>
+          </div>
         </div>
       </div>
+      <!-- end of Pressure Sensor -->
     </div>
-    <!-- end of Pressure Sensor -->
     <!-- end of right area -->
   </section>
   <script src="js/sidebar.js"></script>

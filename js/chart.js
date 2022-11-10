@@ -53,7 +53,7 @@ let flow = 0,
 // });
 
 const dayjs = require("./class/day"); //lib day js
-const { NOTFOUND } = require("dns");
+// const { NOTFOUND } = require("dns");
 const { hasUncaughtExceptionCaptureCallback } = require("process");
 const { error } = require("console");
 const { ifError } = require("assert");
@@ -115,7 +115,7 @@ let chartFlow = c3.generate({
   data: chartDataFlow,
   axis: chartAxis,
   grid: {
-    y2: {
+    y: {
       lines: [{ value: 2 }, { value: 4 }],
     },
   },

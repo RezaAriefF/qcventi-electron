@@ -1,8 +1,8 @@
 // const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, dialog, ipcMain, ipcRenderer } = require("electron");
 const createWindow = () => {
   const win = new BrowserWindow({
-    resizable: false,
+    resizable: true,
     // width: 1440,
     // height: 1006,
     webPreferences: {
@@ -23,6 +23,20 @@ const createWindow = () => {
   // );
   win.maximize();
   win.loadFile("index.html");
+  win.on('close', function(e) {
+    // import dialog terlebih dahulu pada module electron
+    const choice = dialog.showMessageBoxSync(this,
+    {
+        type: 'question', 
+        buttons: ['Yes', 'No'],
+        title: 'Confirm',
+        message: 'Are you sure you want to quit?'
+    });
+    if (choice === 1) {
+        e.preventDefault();
+    }
+});
+
 };
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -35,9 +49,14 @@ app.on("ready", createWindow);
 // explicitly with Cmd + Q.
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
+    
     app.quit();
   }
 });
+
+// app.on('resized', () => {
+//   console.log("window berubah ukurannya")
+// });
 
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the

@@ -13,9 +13,9 @@ let flow = 0, //define flow and pressure (int)
   ping = 0; //ping as signal fron arduino
 
 const dayjs = require("./class/day"); //lib day js
-const { hasUncaughtExceptionCaptureCallback } = require("process");
-const { error } = require("console");
-const { ifError } = require("assert");
+// const { hasUncaughtExceptionCaptureCallback } = require("process");
+// const { error } = require("console");
+// const { ifError } = require("assert");
 const timeNow = () => dayjs().format("YYYY-MM-DD HH:mm:ss"); //format time now
 const timeTail = () => dayjs().subtract(10, "s").format("YYYY-MM-DD HH:mm:ss"); //number of times displayed
 //src : https://codepen.io/nagitch/pen/rNMrXNw

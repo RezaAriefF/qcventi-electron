@@ -3,57 +3,16 @@ const { parse } = require("path"); //detect port
 const SerialPort = require("serialport").SerialPort; //lib serialport(npm)
 const { ReadlineParser } = require("@serialport/parser-readline"); //read serialport
 const port = new SerialPort({ baudRate: 115200, path: "COM9" }); //define port;
-// let port;
-
-// try {
-//   port = new SerialPort({ baudRate: 115200, path: "COM9" }) ;
-// } catch (error) {
-//   alert("WANJIR");
-// } finally {
-//   console.log("Port ", port);
-// }
-
-// if (SerialPort.path) {
-//   alert("WANJIR");
-// }
-
-// port.close(() => {
-//   alert("WANJIR");
-// });
 
 const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" })); //parsing (memisahkan data)
 
 let switchBtn = false;
 let intervalId = 0;
-let flow = 0,
-  pressure = 0; //define flow and pressure (int)
-
-// function getInputValue() {
-//   // Selecting the input element and get its value
-//   var inputVal = document.getElementById("inPressure").value;
-//   // Displaying the value
-//   // var obj1 = { pressure: inputVal };
-//   // const json = JSON.stringify(obj1);
-//   alert(inputVal);
-// }
-//send data to serial port
-// port.write(inputVal);
-
-// parser.on("data", (line) => {
-//   try {
-//     const json = JSON.parse(line); //get data from json
-//     pressure = json.pressure; //define pressure to json
-//     flow = json.flow; //define flow to json
-//   } catch (e) {
-//     //if error
-//     console.log(e);
-//   }
-//   document.getElementById("sPressure").innerHTML = pressure; //send pressure value to sPressure
-//   document.getElementById("sFlow").innerHTML = flow; //send flow value to sFlow
-// });
+let flow = 0, //define flow and pressure (int)
+  pressure = 0,
+  ping = 0; //ping as signal fron arduino
 
 const dayjs = require("./class/day"); //lib day js
-// const { NOTFOUND } = require("dns");
 const { hasUncaughtExceptionCaptureCallback } = require("process");
 const { error } = require("console");
 const { ifError } = require("assert");
@@ -116,71 +75,61 @@ let chartFlow = c3.generate({
   axis: chartAxis,
   grid: {
     y: {
-      lines: [{ value: 2 }, { value: 4 }],
+      lines: [
+        { value: 10 },
+        { value: 20 },
+        { value: 30 },
+        { value: 40 },
+        { value: 50 },
+      ],
     },
   },
 });
 
 function chartFunction() {
   switchBtn = !switchBtn;
+  parser.on("data", (line) => {
+    try {
+      const json = JSON.parse(line); //get data from json
+      ping = json.ping; //set ping from arduino
+      pressure = json.pressure; //define pressure to json
+      flow = json.flow; //define flow to json
+    } catch (e) {
+      //if error
+      console.log(e);
+    }
+  });
   if (switchBtn) {
-    document.getElementById("pressureBtn").innerHTML = "STOP";
-    parser.on("data", (line) => {
-      try {
-        const json = JSON.parse(line); //get data from json
-        pressure = json.pressure; //define pressure to json
-        flow = json.flow; //define flow to json
-      } catch (e) {
-        //if error
-        console.log(e);
-      }
-      document.getElementById("sPressure").innerHTML = pressure; //send pressure value to sPressure
-      document.getElementById("sFlow").innerHTML = flow; //send flow value to sFlow
-    });
+    if (ping == 0) {
+      alert("PORT NOT READY");
+    } else {
+      document.getElementById("pressureBtn").innerHTML = "STOP"; // change button value to stop
+      intervalId = setInterval(() => {
+        // PRESSURE
+        // redraw time series axis in every second
+        chartPressure.axis.min({ x: timeTail() });
+        chartPressure.axis.max({ x: timeNow() });
 
-    intervalId = setInterval(() => {
-      // PRESSURE
-      // redraw time series axis in every second
-      chartPressure.axis.min({ x: timeTail() });
-      chartPressure.axis.max({ x: timeNow() });
+        chartDataPressure.columns[0].push(timeNow());
+        chartDataPressure.columns[1].push(pressure);
 
-      chartDataPressure.columns[0].push(timeNow());
-      chartDataPressure.columns[1].push(pressure);
+        chartPressure.load({ columns: chartDataPressure.columns });
+        // FLOW
+        chartFlow.axis.min({ x: timeTail() });
+        chartFlow.axis.max({ x: timeNow() });
 
-      chartPressure.load({ columns: chartDataPressure.columns });
-      // FLOW
-      chartFlow.axis.min({ x: timeTail() });
-      chartFlow.axis.max({ x: timeNow() });
+        chartDataFlow.columns[0].push(timeNow());
+        chartDataFlow.columns[1].push(flow);
 
-      chartDataFlow.columns[0].push(timeNow());
-      chartDataFlow.columns[1].push(flow);
-
-      chartFlow.load({ columns: chartDataFlow.columns });
-    }, 1000);
+        chartFlow.load({ columns: chartDataFlow.columns });
+        document.getElementById("sPressure").innerHTML = pressure; //send pressure value to sPressure
+        document.getElementById("sFlow").innerHTML = flow; //send flow value to sFlow
+      }, 1000);
+    }
   } else {
-    clearInterval(intervalId);
-    document.getElementById("pressureBtn").innerHTML = "START";
-    document.getElementById("sPressure").innerHTML = 0; //send pressure value to sPressure
+    clearInterval(intervalId); //reset interval
+    document.getElementById("pressureBtn").innerHTML = "START"; // change button value to start
+    document.getElementById("sPressure").innerHTML = 0;
     document.getElementById("sFlow").innerHTML = 0;
   }
 }
-
-// setInterval(() => {
-//   // PRESSURE
-//   // redraw time series axis in every second
-//   chartPressure.axis.min({ x: timeTail() });
-//   chartPressure.axis.max({ x: timeNow() });
-
-//   chartDataPressure.columns[0].push(timeNow());
-//   chartDataPressure.columns[1].push(pressure);
-
-//   chartPressure.load({ columns: chartDataPressure.columns });
-//   // FLOW
-//   chartFlow.axis.min({ x: timeTail() });
-//   chartFlow.axis.max({ x: timeNow() });
-
-//   chartDataFlow.columns[0].push(timeNow());
-//   chartDataFlow.columns[1].push(flow);
-
-//   chartFlow.load({ columns: chartDataFlow.columns });
-// }, 1000);

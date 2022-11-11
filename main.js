@@ -1,5 +1,5 @@
 // const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
   const win = new BrowserWindow({
     resizable: false,
@@ -10,17 +10,18 @@ const createWindow = () => {
       contextIsolation: false,
     },
   });
-  // win.webContents.session.on(
-  //   "select-serial-port",
-  //   (event, portList, webContents, callback) => {
-  //     win.webContents.session.on("serial-port-added", (event, port) => {
-  //       alert("WANJIR MASUK");
-  //     });
-  //     win.webContents.session.on("serial-port-removed", (event, port) => {
-  //       alert("WANJIR METU");
-  //     });
-  //   }
-  // );
+  win.on("close", function (e) {
+    // import dialog terlebih dahulu pada module electron
+    const choice = dialog.showMessageBoxSync(this, {
+      type: "question",
+      buttons: ["Yes", "No"],
+      title: "Confirm",
+      message: "Are you sure you want to quit?",
+    });
+    if (choice === 1) {
+      e.preventDefault();
+    }
+  });
   win.maximize();
   win.loadFile("index.html");
 };

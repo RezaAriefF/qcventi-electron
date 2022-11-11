@@ -96,22 +96,24 @@
 
       <!-- Sensor Input -->
       <div class="container-input">
-        <div class="title-sensor">PEEP</div>
-        <input type="number" max="6" min="1" id="inPeep" /> <br />
-        <a>Enter the target value as desired so that the pressure sensor is used to become the target to be achieved and
+        <label class="title-sensor" for="inPressure">Pressure Target</label>
+        <input type="number" max="450" min="1" id="inPressure" /> <br />
+        <a class="anchor">Enter the target value as desired so that the pressure sensor is used to become the target to
+          be achieved and
           keep repeating until that target.</a>
       </div>
       <div class="container-input">
-        <div class="title-sensor">Pressure Target</div>
-        <input type="number" max="450" min="1" id="inPressure" /> <br />
-        <a>Enter the target value as desired so that the pressure sensor is used to become the target to be achieved and
+        <label class="title-sensor" for="inPeep">PEEP</label>
+        <input type="number" max="6" min="1" id="inPeep" /> <br />
+        <a class="anchor">Enter the PEEP value as desired so that the pressure sensor is used to become the target to
+          be achieved and
           keep repeating until that target.</a>
       </div>
       <!-- end Sensor Input -->
 
       <!-- Start Button -->
-      <div class="container-output">
-        <button type="button" onclick="chartFunction()">
+      <div class="container-output-2">
+        <button class="start-button" type="button" onclick="chartFunction()">
           <div class="title-sensor">
             <div class="text-start" id="pressureBtn">START</div>
           </div>

@@ -9,30 +9,73 @@
   font-family: "Poppins", sans-serif;
 }
 .sidebar {
+  /* sidebar pas ketutup */
   position: fixed;
+  background-color: #5b74a7;
   left: 0;
   top: 0;
   height: 100%;
-  width: 78px;
-  background: #242a37;
-  padding: 6px 14px;
+  width: 79px;
   z-index: 99;
   transition: all 0.5s ease;
+}
+.logo {
+  margin-right: 10%;
+}
+.logo-oxyzen {
+  opacity: 0;
+  margin: auto;
+  margin-top: 20px;
+  width: 100px;
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-oxyzen {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.5s ease;
+}
+.logo-lung {
+  opacity: 0;
+  margin: auto;
+  padding: 20px;
+  margin-top: 30px;
+  width: 180px; /* ukuran logo jantung */
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-lung {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.5s ease;
+}
+.logo-stechoq {
+  opacity: 0;
+  margin: auto;
+  margin-top: 78px;
+  width: 200px; /* ukuran logo stechoq */
+  transition: all 0.5s ease;
+}
+.sidebar.open .logo-stechoq {
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.5s ease;
+}
+.break {
+  margin-bottom: 20px;
+}
+.sidebar-top {
+  height: 150px;
+  background-color: #5b74a7;
 }
 .sidebar.open {
   width: 250px;
 }
 .sidebar .logo-details {
-  height: 60px;
+  height: 100px;
   display: flex;
   align-items: center;
   position: relative;
 }
-.sidebar .logo-details img {
-  width: 70px;
-}
 .sidebar .logo-details .icon {
-  opacity: 0;
   transition: all 0.5s ease;
 }
 .sidebar .logo-details .logo_name {
@@ -43,7 +86,7 @@
   transition: all 0.5s ease;
 }
 .sidebar.open .logo-details .icon,
-.sidebar.open .logo-details .logo_name {
+.sidebar.open .logo-details .logo_name .logo-oxyzen {
   opacity: 1;
 }
 .sidebar .logo-details #btn {
@@ -61,6 +104,17 @@
 .sidebar.open .logo-details #btn {
   text-align: right;
 }
+.sidebar-list {
+  height: 350px;
+  padding: 6px 14px;
+  background: #242a37;
+  border-radius: 0px 15px 0px 0px; /* radius sidebar nya */
+}
+.sidebar-footer {
+  height: 100%;
+  padding: 6px 14px;
+  background: #242a37;
+}
 
 /* penambahan responsivitas  */
 
@@ -72,11 +126,14 @@
   text-align: center;
   line-height: 60px;
 }
-.sidebar .nav-list {
-  margin-top: 20px;
-  height: 100%;
+/* .sidebar .nav-list {
+
+} */
+.nav-list {
+  margin-top: 30px;
 }
-.sidebar .nav-list .aktif {
+
+.nav-list .aktif {
   background: #ffd428;
   color: #1d1b31;
 }
@@ -258,7 +315,7 @@
   border-radius: 5px;
   border: 1px solid;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 4%;
 }
 .home-section .container-input {
   width: 48%;
@@ -271,7 +328,7 @@
   border-radius: 5px;
   border: 1px solid;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 4%;
 }
 
 .title-sensor {
@@ -328,8 +385,8 @@
   padding-top: 35px;
 }
 .home-section .container-chart .title {
-  padding-top: 15px;
-  padding-left: 12px;
+  padding-top: 10%;
+  padding-left: 2%;
   font-weight: 600;
   font-size: 24px;
 }
@@ -357,30 +414,42 @@ input {
 }
 
 .home-section .container {
-  width: 1029px;
-  height: 554px;
+  width: 80%;
+  height: 70%;
   border: 2px solid #ffd428;
   border-radius: 5px;
   background: rgba(36, 42, 55, 1);
-  margin: 100px 177px;
+  margin: 10% 10%;
 }
 
 .home-section .container .content-info {
+  /* padding-top: 5%;
+  padding-right: 7%;
+  padding-left: 7%; */
   padding-top: 44px;
   padding-right: 76px;
   padding-left: 52px;
   text-transform: uppercase;
   font-style: normal;
+  /* font-weight: 500;
+  font-size: 100%;
+  line-height: 150%; */
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
 }
 
 .home-section .container .img-info {
-  width: 100%;
-  height: 290px;
+  width: 87%;
+  height: 60.4%;
+  padding-left: 18%;
+  padding-right: 8%;
+  padding-top: 1%;
+  margin-bottom: -0.6%;
+  /* width: 100%;
+  height: 299px;
   padding-left: 195px;
-  padding-right: 195px;
+  padding-right: 195px; */
 }
 .home-section .container .content {
   display: flex;
@@ -404,8 +473,8 @@ input {
 
 .home-section .container .content .about {
   position: absolute;
-  padding-top: 200px;
-  padding-left: 180px;
+  padding-top: 12%;
+  padding-left: 16%;
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -414,11 +483,11 @@ input {
 }
 
 .home-section .container .content .img-about {
-  width: 385px;
-  height: 280px;
-  margin-top: 270px;
-  margin-left: 640px;
-  border-bottom-right-radius: 5px;
+  width: 30%;
+  height: 20%;
+  margin-top: 27%;
+  margin-left: 67%;
+  border-bottom-right-radius: 5%;
 }
 
 .left-area {

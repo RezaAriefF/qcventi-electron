@@ -8,6 +8,15 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+canvas {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 0;
+  background: transparent;
+}
 .sidebar {
   /* sidebar pas ketutup */
   position: fixed;

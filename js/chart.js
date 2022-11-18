@@ -32,7 +32,7 @@ const chartAxis = {
 };
 
 const chartDataPressure = {
-  // type: "spline",
+  type: "spline",
   x: "x",
   xFormat: "%Y-%m-%d %H:%M:%S.%L",
   columns: [["x"], ["Pressure"]],
@@ -48,7 +48,7 @@ let chartPressure = c3.generate({
 });
 
 const chartDataFlow = {
-  // type: "spline",
+  type: "spline",
   x: "x",
   xFormat: "%Y-%m-%d %H:%M:%S.%L", // format millisecond
   columns: [["x"], ["Flow"]],
@@ -63,10 +63,54 @@ let chartFlow = c3.generate({
   axis: chartAxis,
 });
 
+var EcgData = ["905,275,923,950,275,979,997,275,1033,1090,1157,1232,1320,1398"];
+
+var canvas = document.getElementById("chartFlow");
+var ctx = canvas.getContext("2d");
+var w = canvas.width,
+  h = canvas.height,
+  speed = 1,
+  scanBarWidth = 20,
+  i = 0,
+  data = EcgData[0].split(","),
+  color = "#85e426";
+var px = 0;
+var opx = 0;
+var py = h / 2;
+var opy = py;
+ctx.strokeStyle = color;
+ctx.lineWidth = 3;
+ctx.setTransform(1, 0, 0, -1, 0, h);
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function drawWave() {
+  px += speed;
+  ctx.clearRect(px, 0, scanBarWidth, h);
+  ctx.beginPath();
+  ctx.moveTo(opx, opy);
+  ctx.lineJoin = "round";
+  // py = data[++i >= data.length ? (i = 0) : i++] / 450 + 10;
+  // py = getRandomArbitrary(0, 100);
+  py = flow.toFixed(2);
+  console.log(1212121, (flow.toFixed(2) - 100) * 5, flow.toFixed(2));
+  ctx.lineTo(px, py);
+  ctx.stroke();
+  opx = px;
+  opy = py;
+  if (opx > w) {
+    px = opx = -speed;
+  }
+
+  requestAnimationFrame(drawWave);
+}
+
 parser.on("data", (line) => {
   try {
     const json = JSON.parse(line); //get data from json
-    ping = json.ping; //set ping from arduino
+    // ping = json.ping; //set ping from arduino
     pressure = json.pressure; //define pressure to json
     flow = json.flow; //define flow to json
   } catch (e) {
@@ -95,24 +139,30 @@ function chartFunction() {
       port.write("$");
       port.write(inputPeep);
       port.write("#");
+
+      drawWave();
+
       intervalId = setInterval(() => {
-        // PRESSURE
-        // redraw time series axis in every second
-        chartPressure.axis.min({ x: timeTail() });
-        chartPressure.axis.max({ x: timeNow() });
+        // drawWave();
+        // // PRESSURE
+        // // redraw time series axis in every second
+        // chartPressure.axis.min({ x: timeTail() });
+        // chartPressure.axis.max({ x: timeNow() });
 
-        chartDataPressure.columns[0].push(timeNow());
-        chartDataPressure.columns[1].push(pressure);
+        // chartDataPressure.columns[0].push(timeNow());
+        // chartDataPressure.columns[1].push(pressure);
 
-        chartPressure.load({ columns: chartDataPressure.columns });
-        // FLOW
-        chartFlow.axis.min({ x: timeTail() });
-        chartFlow.axis.max({ x: timeNow() });
+        // chartPressure.load({ columns: chartDataPressure.columns });
+        // // FLOW
+        // chartFlow.axis.min({ x: timeTail() });
+        // chartFlow.axis.max({ x: timeNow() });
 
-        chartDataFlow.columns[0].push(timeNow());
-        chartDataFlow.columns[1].push(flow);
+        // chartDataFlow.columns[0].push(timeNow());
+        // chartDataFlow.columns[1].push(flow);
 
-        chartFlow.load({ columns: chartDataFlow.columns });
+        // chartFlow.load({ columns: chartDataFlow.columns });
+        // drawWave();
+        // (pressure.toFixed(2) - 500) / 2;
         document.getElementById("sPressure").innerHTML = pressure.toFixed(2); //send pressure value to sPressure
         document.getElementById("sFlow").innerHTML = flow.toFixed(2); //send flow value to sFlow
       }, 30);

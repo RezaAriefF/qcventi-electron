@@ -1,6 +1,7 @@
 // const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
+
 const win = new BrowserWindow({
     // resizable: false,
     // width: 1440,

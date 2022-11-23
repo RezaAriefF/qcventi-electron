@@ -73,7 +73,7 @@
       <div class="flow">
         <div class="container-chart">
           <a class="title">Flow Sensor</a>
-          <canvas id="chartFlow" width="700" height="200"></canvas>
+          <div id="flowGraph" style="width: 100%"></div>
           <!-- <div id="chartFlow"></div> -->
           <a class="unit">L/min</a>
         </div>
@@ -84,7 +84,8 @@
       <div class="pressure">
         <div class="container-chart">
           <a class="title">Pressure Sensor</a>
-          <div id="chartPressure"></div>
+          <div id="pressureGraph" style="width: 100%"></div>
+          <!-- <div id="chartPressure"></div> -->
           <a class="unit">cmH2o</a>
         </div>
       </div>
@@ -157,16 +158,6 @@
   <script src="js/chart.js"></script>
   <script src="js/c3.min.js"></script>
   <script src="js/d3.v5.min.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
-  <script src="js/chart-ecg.js"></script> -->
-  <!-- <script src="js/get-serial.js"></script> -->
-  <!-- <script src="renderer.js"></script> -->
-
-  <!-- <script>
-    $("#tombol").click(function () {
-      $.getScript("js/chart.js")
-    }); 
-  </script> -->
 </body>
 
 </html>

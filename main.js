@@ -2,7 +2,7 @@
 const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
   const win = new BrowserWindow({
-    resizable: false,
+    // resizable: false,
     // width: 1440,
     // height: 1006,
     webPreferences: {

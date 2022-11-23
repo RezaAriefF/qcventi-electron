@@ -17,17 +17,30 @@ canvas {
   font-size: 0;
   background: transparent;
 }
-.sidebar {
+/* .sidebar { */
   /* sidebar pas ketutup */
-  position: fixed;
+  /* position: fixed;
   background-color: #5b74a7;
   left: 0;
   top: 0;
   height: 100%;
   width: 79px;
   z-index: 99;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease; */
+
+  .sidebar {
+    /* sidebar pas ketutup */
+    position: fixed;
+    background-color: #E4E5F1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 79px;
+    z-index: 99;
+    transition: all 0.5s ease;
+
 }
+
 .logo {
   margin-right: 10%;
 }
@@ -73,7 +86,7 @@ canvas {
 }
 .sidebar-top {
   height: 150px;
-  background-color: #5b74a7;
+  background-color: #E4E5F1;
 }
 .sidebar.open {
   width: 250px;
@@ -112,23 +125,31 @@ canvas {
 }
 .sidebar.open .logo-details #btn {
   text-align: right;
+  
 }
+
+/* warna tombol sidebar */
+.sidebar .sidebar-top .logo-details i {
+  color: #242A37;
+}
+
 .sidebar-list {
   height: 350px;
   padding: 6px 14px;
-  background: #242a37;
+  /* background: #242a37; */
+  background: #FFFFFF;
   border-radius: 0px 15px 0px 0px; /* radius sidebar nya */
 }
 .sidebar-footer {
   height: 100%;
   padding: 6px 14px;
-  background: #242a37;
+  background: #FFFFFF; /* warna sidebar*/
 }
 
 /* penambahan responsivitas  */
 
 .sidebar i {
-  color: #fff;
+  color: #FFFFFF;
   height: 60px;
   min-width: 50px;
   font-size: 28px;
@@ -140,11 +161,12 @@ canvas {
 } */
 .nav-list {
   margin-top: 30px;
+  
 }
 
 .nav-list .aktif {
-  background: #ffd428;
-  color: #1d1b31;
+  background: #484B6A;
+  color: #61677F;
 }
 
 .sidebar li {
@@ -158,7 +180,7 @@ canvas {
   top: -20px;
   left: calc(100% + 15px);
   z-index: 3;
-  background: #fff;
+  background: #61677F;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
@@ -188,15 +210,19 @@ canvas {
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #293a58;
+  background: #E4E5F1;  /* warna kotakan sidebar tidak aktif */
 }
 .sidebar li a:hover {
-  background: #ffd428;
+  background: #484B6A;
   /* transition: all 0.5s ease;
   color: #242a37; */
 }
+
+/* icon icon sidebar */
+
+/* aktif iconya */
 .sidebar li a .links_name {
-  color: #fff;
+  color: #ffffff;
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
@@ -211,8 +237,102 @@ canvas {
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i {
   transition: all 0.5s ease;
-  color: #242a37;
+  color: #ffffff;
 }
+
+/* flow sensor */
+.sidebar li a .links_namesen {
+  color: #61677F;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li .sen i{   /* warna icon sidebar */
+  color: #61677F;
+}
+.sidebar.open li a .links_namesen {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_namesen,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+
+/* info */
+.sidebar li a .links_nameinfo {
+  color: #61677F;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li .info i{   /* warna icon sidebar */
+  color: #61677F;
+}
+.sidebar.open li a .links_nameinfo {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_nameinfo,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+
+/* how to use */
+.sidebar li a .links_namehow {
+  color: #61677F;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li .how i{   /* warna icon sidebar */
+  color: #61677F;
+}
+.sidebar.open li a .links_namehow {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_namehow,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+
+/* about */
+.sidebar li a .links_nameabout {
+  color: #61677F;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar li .about i{   /* warna icon sidebar */
+  color: #61677F;
+}
+.sidebar.open li a .links_nameabout {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar li a:hover .links_nameabout,
+.sidebar li a:hover i {
+  transition: all 0.5s ease;
+  color: #ffffff;
+}
+
+/* akhir icon icon */
 
 .sidebar li i {
   height: 50px;
@@ -274,7 +394,7 @@ canvas {
 }
 .home-section {
   position: relative;
-  background: #293a58;
+  background: #F6F6F6;  /* warna backgound utama*/
   min-height: 100vh;
   top: 0;
   left: 78px;
@@ -287,6 +407,16 @@ canvas {
   padding: 18px 34px;
   text-align: justify;
 }
+
+.home-section .container .content-info {
+  background-color: #FFFFFF;
+  color: #242A37;
+}
+
+.home-section .container-info {
+  background-color: #ffffff;
+}
+
 .sidebar.open ~ .home-section {
   left: 250px;
   width: calc(100% - 250px);
@@ -311,7 +441,7 @@ canvas {
 .home-section .container-chart {
   width: auto;
   margin-bottom: 45px;
-  background: #242a37;
+  background: #FFFFFF;
   box-sizing: border-box;
   border: 1px solid;
   border-radius: 5px;
@@ -319,7 +449,7 @@ canvas {
 .home-section .container-output {
   width: 100%;
   float: right;
-  background: #242a37;
+  background: #FFFFFF;
   box-sizing: border-box;
   border-radius: 5px;
   border: 1px solid;
@@ -332,16 +462,27 @@ canvas {
   margin-left: 1%;
   margin-right: 1%;
   float: left;
-  background: #242a37;
+  background: #FFFFFF; /* warna inputan bakcground peep dan presue*/
   box-sizing: border-box;
   border-radius: 5px;
-  border: 1px solid;
+  border: 2px solid;
   text-align: center;
   margin-bottom: 4%;
+  color: #ffd428;
+}
+
+#inPressure {
+  border: #ffffff;
+  width: 90%;
+}
+
+#inPeep {
+  border: #FFFFFF;
+  width: 90%;
 }
 
 .title-sensor {
-  color: #ffffff;
+  color: #242A37;
   font-weight: 700;
   font-size: 24px;
   justify-content: center;
@@ -356,21 +497,31 @@ canvas {
 }
 
 .container-output-2 .start-button {
-  border: 1px solid #ffd428;
-  background-color: #242a37;
+  border: 2px solid #ffd428;
+  background-color: #484B6A;
   cursor: pointer;
   border-radius: 15px;
   width: 100%;
   margin-bottom: 20px;
+ 
 }
 
-.start-button:hover .text-start {
-  border: 1px solid #ffd428;
-  background-color: #ffd428;
+#pressureBtn {
+  color: #fff;
+}
+
+#pressureBtn:hover {
+  color: #242A37;
+}
+
+.start-button:hover  {
+  border: 2px solid #ffd428;
+  background-color: #D2D3DB;
   cursor: pointer;
   border-radius: 15px;
   width: 100%;
-  color: black;
+  color: #242A37;
+  
 }
 
 .sensor-output .value {
@@ -395,7 +546,9 @@ canvas {
 }
 .home-section .container-chart .title {
   padding-top: 10%;
-  padding-left: 2%;
+  padding-left: 5%;
+  color: #242A37; /* warna huruf atas chart */
+  /* padding-right: 70%; */
   font-weight: 600;
   font-size: 24px;
 }
@@ -404,6 +557,14 @@ canvas {
   font-weight: 700;
   font-size: 24px;
   line-height: 36px;
+}
+
+.home-section .text {
+  color: #242A37;
+}
+
+.container-input .anchor {
+  color: #242A37;  /* warna huruf inputan peep dan pressure */
 }
 
 .a {
@@ -415,8 +576,9 @@ input {
   text-align: center;
   border-radius: 5px;
   width: 100%;
-  background-color: #24d4ec;
-  color: #fff;
+  background-color: #E4E5F1; /*warnnaa inputan */
+  color: #242A37; 
+  
   font-family: "Rounded Mplus 1c";
   font-weight: 500;
   font-size: 55px;
@@ -427,7 +589,8 @@ input {
   height: 70%;
   border: 2px solid #ffd428;
   border-radius: 5px;
-  background: rgba(36, 42, 55, 1);
+  /* background: rgba(36, 42, 55, 1); */
+  background: #FFFFFF;
   margin: 10% 10%;
 }
 
@@ -449,11 +612,11 @@ input {
 }
 
 .home-section .container .img-info {
-  width: 87%;
-  height: 60.4%;
-  padding-left: 18%;
+  width: 80%;
+  height: 60%;
+  padding-left: 35%;
   padding-right: 8%;
-  padding-top: 1%;
+  padding-top: 7%;
   margin-bottom: -0.6%;
   /* width: 100%;
   height: 299px;
@@ -472,12 +635,14 @@ input {
   font-weight: 400;
   font-size: 14px;
   line-height: 26px;
+  color: #242A37;
 }
 .home-section .container .content .img-how-to-use {
-  margin-top: 222px;
-  padding-right: 10px;
-  width: 50%;
-  height: 328px;
+  padding-right: 2%;
+  /* width: 40%; */
+  /* height: 1%; */
+  margin-top: 220px;
+  
 }
 
 .home-section .container .content .about {
@@ -489,6 +654,7 @@ input {
   line-height: 24px;
   text-align: center;
   text-transform: uppercase;
+  color: #242A37;
 }
 
 .home-section .container .content .img-about {
@@ -497,12 +663,13 @@ input {
   margin-top: 27%;
   margin-left: 67%;
   border-bottom-right-radius: 5%;
+  background-color: #FFFFFF;
 }
 
 .left-area {
   margin-top: 70px;
   float: left;
-  width: 60%;
+  width: 63%;
 }
 
 .right-area {
@@ -520,3 +687,69 @@ input {
   padding: 10px;
   align-items: center;
 }
+
+
+/* menu switch
+.sidebar .sidebar-footer .mode{
+  position: relative;
+  border-radius: 6px;
+  background: var(--primary-color-light);
+}
+.sidebar .sidebar-footer .mode .moon-sun{
+  height: 50px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+}
+.sidebar .sidebar-footer .mode i{
+  position: absolute;
+  transition: var(--tran-04);
+}
+.sidebar .sidebar-footer .mode i.sun{
+  opacity: 0;
+}
+
+body.dark .sidebar .sidebar-footer .mode i.sun{
+  opacity: 1;
+}
+body.dark .sidebar .sidebar-footer .mode i.moon{
+  opacity: 0;
+}
+
+.sidebar .sidebar-footer .mode .toggle-switch{
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--tran-05);
+}
+
+.toggle-switch .switch{
+  position: relative;
+  height: 22px;
+  width: 44px;
+  border-radius: 25px;
+  background: var(--toggle-color);
+}
+
+.switch::before{
+  content: '';
+  position: absolute;
+  height: 15px;
+  width:15px;
+  border-radius: 50%;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background: var(--sidebar-color);
+  transition: var(--tran-03);
+}
+body.dark .switch::before{
+  left: 25px;
+} */
+

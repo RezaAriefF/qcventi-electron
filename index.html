@@ -10,6 +10,7 @@
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
   <!-- Font Awesome Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -28,37 +29,38 @@
         <li>
           <a href="index.html" class="aktif">
             <i class="fas fa-lungs"></i>
-            <span class="links_name">Flow and Pressure</span>
+            <span class="links_name">Flow and Pressure </span>
           </a>
           <span class="tooltip">Sensor</span>
         </li>
         <li>
-          <a href="information.html">
+          <a class="info" href="information.html">
             <i class="fas fa-circle-info"></i>
-            <span class="links_name">Information</span>
+            <span class="links_nameinfo">Information</span>
           </a>
           <span class="tooltip">Information</span>
         </li>
         <li>
-          <a href="how_to_use.html">
+          <a class="how" href="how_to_use.html">
             <i class="fa-sharp fa-solid fa-circle-question"></i>
-            <span class="links_name">How To Use</span>
+            <span class="links_namehow">How To Use</span>
           </a>
           <span class="tooltip">How To Use</span>
         </li>
         <li>
-          <a href="about.html">
+          <a class="about" href="about.html">
             <i class="fa-regular fa-copyright"></i>
-            <span class="links_name">About</span>
+            <span class="links_nameabout">About</span>
           </a>
           <span class="tooltip">About</span>
         </li>
       </ul>
     </div>
     <div class="sidebar-footer">
-      <div class="logo-details break">
+      <button onclick="myFunction()">Theme</button>
+      <!-- <div class="logo-details break">
         <img class="logo-lung" title="logo-lung" src="assets/logo_lung-removebg-preview.png" />
-      </div>
+      </div> -->
       <div class="logo-details">
         <img class="logo-stechoq" title="logo-stechoq" src="assets/logo_stechoq.png" />
       </div>
@@ -73,8 +75,8 @@
       <div class="flow">
         <div class="container-chart">
           <a class="title">Flow Sensor</a>
-          <canvas id="chartFlow" width="700" height="200"></canvas>
           <!-- <div id="chartFlow"></div> -->
+          <canvas id="chartFlow" width="700" height="200"></canvas>
           <a class="unit">L/min</a>
         </div>
       </div>
@@ -157,6 +159,8 @@
   <script src="js/chart.js"></script>
   <script src="js/c3.min.js"></script>
   <script src="js/d3.v5.min.js"></script>
+  <script src="renderer.js"></script>
+  <script src="js/darkmode.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
   <script src="js/chart-ecg.js"></script> -->
   <!-- <script src="js/get-serial.js"></script> -->

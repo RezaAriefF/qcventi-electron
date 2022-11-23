@@ -1,30 +1,58 @@
 // const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
-  const win = new BrowserWindow({
+
+const win = new BrowserWindow({
     // resizable: false,
     // width: 1440,
     // height: 1006,
+    show: false,
     webPreferences: {
+      // preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
-  win.on("close", function (e) {
-    // import dialog terlebih dahulu pada module electron
-    const choice = dialog.showMessageBoxSync(this, {
-      type: "question",
-      buttons: ["Yes", "No"],
-      title: "Confirm",
-      message: "Are you sure you want to quit?",
-    });
-    if (choice === 1) {
-      e.preventDefault();
-    }
+
+win.loadFile('index.html')
+
+var splash = new BrowserWindow({
+    // width: 1440, 
+    // height: 1006, 
+    fullscreen: true,
+    transparent: true, 
+    frame: false, 
+    alwaysOnTop: true 
+});
+
+splash.loadFile('splashscreen.html');
+splash.center();
+setTimeout(function () {
+  splash.close();
+  win.center();
+  win.show();
+}, 4000);
+
+
+win.on("close", function (e) {
+  // import dialog terlebih dahulu pada module electron
+  const choice = dialog.showMessageBoxSync(this, {
+    type: "question",
+    buttons: ["Yes", "No"],
+    title: "Confirm",
+    message: "Are you sure you want to quit?",
   });
-  win.maximize();
-  win.loadFile("index.html");
+  if (choice === 1) {
+    e.preventDefault();
+  }
+});
+win.maximize();
+win.loadFile("index.html");
+
+
 };
+
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.

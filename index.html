@@ -57,7 +57,6 @@
       </ul>
     </div>
     <div class="sidebar-footer">
-      <button onclick="myFunction()">Theme</button>
       <!-- <div class="logo-details break">
         <img class="logo-lung" title="logo-lung" src="assets/logo_lung-removebg-preview.png" />
       </div> -->
@@ -75,9 +74,9 @@
       <div class="flow">
         <div class="container-chart">
           <a class="title">Flow Sensor</a>
-          <div id="flowGraph" style="width: 100%"></div>
+          <div id="flowGraph"></div>
           <!-- <div id="chartFlow"></div> -->
-          <canvas id="chartFlow" width="700" height="200"></canvas>
+          <!-- <canvas id="chartFlow" width="700" height="200"></canvas> -->
           <a class="unit">L/min</a>
         </div>
       </div>
@@ -87,7 +86,13 @@
       <div class="pressure">
         <div class="container-chart">
           <a class="title">Pressure Sensor</a>
-          <div id="pressureGraph" style="width: 100%"></div>
+          <div class="switch-align">
+            <label class="switch">
+              <input type="checkbox" placeholder="#">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div id="pressureGraph" ></div>
           <!-- <div id="chartPressure"></div> -->
           <a class="unit">cmH2o</a>
         </div>
@@ -114,18 +119,28 @@
       <!-- Sensor Input -->
       <div class="container-input">
         <label class="title-sensor" for="inPressure">Pressure Target</label>
-        <input type="number" max="450" min="1" id="inPressure" /> <br />
-
-        <a class="anchor">Enter the target value as desired so that the pressure sensor is used to become the target to
-          be achieved and
-          keep repeating until that target.</a>
+        <input type="number" max="450" min="1" id="inPressure" />
+        <p class="unit"><u>mbar</u></p>
       </div>
       <div class="container-input">
         <label class="title-sensor" for="inPeep">PEEP</label>
-        <input type="number" max="7" min="1" id="inPeep" /> <br />
-        <a class="anchor">Enter the target value as desired so that the PEEP sensor is used to become the target to
-          be achieved and
-          keep repeating until that target.</a>
+        <input type="number" max="7" min="1" id="inPeep" />
+        <p class="unit"><u>mbar</u></p>
+      </div>
+      <div class="container-input">
+        <label class="title-sensor" for="inPeep">Set Timer</label>
+        <input type="number" max="30" min="1" id="setTimer" placeholder="0" />
+        <p class="unit"><u>Sec</u></p>
+      </div>
+      <div class="container-input">
+        <label class="title-sensor" for="optionInput">Option Input</label>
+        <div class="container-output-2">
+          <button class="reset-button" type="button">
+            <div class="title-sensor">
+              <div class="text-reset" id="pressureBtn">Reset All</div>
+            </div>
+          </button>
+        </div>
       </div>
       <!-- end Sensor Input -->
 

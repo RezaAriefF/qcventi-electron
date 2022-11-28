@@ -10,7 +10,7 @@
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
   <!-- Font Awesome Icon -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-  
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -85,14 +85,14 @@
       <!-- Pressure Sensor -->
       <div class="pressure">
         <div class="container-chart">
-          <a class="title">Pressure Sensor</a>
+          <a class="title" id="title-pressure">Pressure Sensor 1</a>
           <div class="switch-align">
             <label class="switch">
-              <input type="checkbox" placeholder="#">
+              <input type="checkbox" placeholder="#" id="switchVal" onclick="slideBtn()">
               <span class="slider round"></span>
             </label>
           </div>
-          <div id="pressureGraph" ></div>
+          <div id="pressureGraph"></div>
           <!-- <div id="chartPressure"></div> -->
           <a class="unit">cmH2o</a>
         </div>
@@ -119,12 +119,12 @@
       <!-- Sensor Input -->
       <div class="container-input">
         <label class="title-sensor" for="inPressure">Pressure Target</label>
-        <input type="number" max="450" min="1" id="inPressure" />
+        <input type="number" max="450" min="1" id="inPressure" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
       <div class="container-input">
         <label class="title-sensor" for="inPeep">PEEP</label>
-        <input type="number" max="7" min="1" id="inPeep" />
+        <input type="number" max="7" min="1" id="inPeep" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
       <div class="container-input">
@@ -137,7 +137,7 @@
         <div class="container-output-2">
           <button class="reset-button" type="button">
             <div class="title-sensor">
-              <div class="text-reset" id="pressureBtn">Reset All</div>
+              <div class="text-reset" id="resetBtn">Reset All</div>
             </div>
           </button>
         </div>

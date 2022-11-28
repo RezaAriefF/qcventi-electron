@@ -8,13 +8,14 @@ const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" })); //parsing (
 
 let switchBtn = false;
 let flow = -1, //define flow and pressure (int)
-  pressure = -1;
+  pressure = -1,
+  pressure2 = -1;
 let btnVal = ""; // define button as string
 
-const lowerLimitY = 1000; //Minimum Y value
+const lowerLimitY = 500; //Minimum Y value
 // const xSecond = 8   //X Axis
 // const xTick = xSecond * Math.floor(Math.random() * 100);
-const xTick = 350; // X Axis tick
+const xTick = 1000; // X Axis tick
 let dataflow = [];
 let datapressure = [];
 const realWidthInt = 800;
@@ -27,7 +28,7 @@ let currentIndex = 0;
 parser.on("data", (line) => {
   try {
     const json = JSON.parse(line); //get data from json
-    // ping = json.ping; //set ping from arduino
+    pressure2 = json.pressure2;
     pressure = json.pressure; //define pressure to json
     flow = json.flow; //define flow to json
   } catch (e) {
@@ -138,7 +139,7 @@ function draw() {
     .attr("transform", "translate(50,0)")
     .attr("x", (d, i) => x(i))
     .attr("y", -1)
-    .attr("fill", "#242a37")
+    .attr("fill", "#FFFFFF")
     .attr("width", 10)
     .attr("height", realHeightInt - 50);
 
@@ -148,7 +149,7 @@ function draw() {
     .attr("transform", "translate(50,0)")
     .attr("x", (d, i) => x(i))
     .attr("y", -1)
-    .attr("fill", "#242a37")
+    .attr("fill", "#FFFFFF")
     .attr("width", 10)
     .attr("height", realHeightInt - 50);
 }
@@ -231,16 +232,34 @@ function update(flowData, pressureData) {
   barPressure.exit().remove();
 }
 
+var isChecked = false;
+
+function slideBtn() {
+  isChecked = !isChecked;
+  currentIndex = 0;
+  dataflow = [];
+  datapressure = [];
+  if (!isChecked) {
+    document.getElementById("title-pressure").innerHTML = "Pressure Sensor 1";
+  } else {
+    document.getElementById("title-pressure").innerHTML = "Pressure Sensor 2";
+  }
+}
+
 function loop() {
   let interval = setInterval(() => {
     currentIndex++;
     dataflow.splice(currentIndex % xTick, 1, flow);
-    datapressure.splice(currentIndex % xTick, 1, pressure);
-    update(dataflow, datapressure);
-
-    document.getElementById("sPressure").innerHTML = pressure;
     document.getElementById("sFlow").innerHTML = flow;
+    if (isChecked) {
+      datapressure.splice(currentIndex % xTick, 1, pressure2);
+      document.getElementById("sPressure").innerHTML = pressure2;
+    } else {
+      datapressure.splice(currentIndex % xTick, 1, pressure);
+      document.getElementById("sPressure").innerHTML = pressure;
+    }
 
+    update(dataflow, datapressure);
     if (currentIndex >= xTick) {
       currentIndex = 0;
     }
@@ -273,12 +292,14 @@ function chartFunction() {
       loop();
     }
   } else {
+    // document.getElementById("sPressure").innerHTML = 0;
+    // document.getElementById("sFlow").innerHTML = 0;
+    // document.getElementById("inPressure").innerHTML = 0;
+    // document.getElementById("inPeep").innerHTML = 0;
     document.getElementById("pressureBtn").innerHTML = "START"; // change button value to start
     btnVal = "*STOP";
     port.write(btnVal);
     port.write("#");
-    document.getElementById("sPressure").innerHTML = 0;
-    document.getElementById("sFlow").innerHTML = 0;
   }
 }
 

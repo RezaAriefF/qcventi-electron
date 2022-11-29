@@ -828,7 +828,7 @@ body.dark .switch::before{
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #E4E5F1;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -841,17 +841,17 @@ body.dark .switch::before{
   left: 4px;
   bottom: 2px;
 
-  background-color: white;
+  background-color: #484B6A;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #242a37;
+  background-color: #24d4ec;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #242a37;
+  box-shadow: 0 0 1px #24d4ec;
 }
 
 input:checked + .slider:before {

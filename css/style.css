@@ -524,9 +524,9 @@ canvas {
   background-color: #484b6a;
   cursor: pointer;
   border-radius: 15px;
-  width: 80%;
-  margin-top: 60px;
-  margin-bottom: 10px;
+  width: 65%;
+  margin-top: 48px;
+  margin-bottom: 15px;
 }
 
 #pressureBtn {
@@ -551,7 +551,7 @@ canvas {
   background-color: #d2d3db;
   cursor: pointer;
   border-radius: 15px;
-  width: 80%;
+  width: 65%;
   color: #242a37;
 }
 

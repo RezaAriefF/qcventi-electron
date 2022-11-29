@@ -181,6 +181,7 @@ canvas {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 4px;
+  color: #f6f6f6;
   font-size: 15px;
   font-weight: 400;
   opacity: 0;
@@ -642,7 +643,7 @@ input {
   padding-top: 44px;
   padding-right: 76px;
   padding-left: 52px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-style: normal;
   /* font-weight: 500;
   font-size: 100%;

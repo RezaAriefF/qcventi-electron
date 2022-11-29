@@ -154,6 +154,14 @@ function draw() {
     .attr("height", realHeightInt - 50);
 }
 
+// fungsi button reset
+function resetFunction() {
+  document.getElementById("inPressure").value = 0;
+  document.getElementById("inPeep").value = 0;
+  document.getElementById("setTimer").value = 0;
+}
+
+
 function update(flowData, pressureData) {
   maxFlowVal = Math.max(...flowData.map((dt) => dt));
   maxFlowVal = Math.ceil(maxFlowVal);

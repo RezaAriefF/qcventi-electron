@@ -119,17 +119,17 @@
       <!-- Sensor Input -->
       <div class="container-input">
         <label class="title-sensor" for="inPressure">Pressure Target</label>
-        <input type="number" max="450" min="1" id="inPressure" placeholder="0" />
+        <input type="number" max="450" min="0" id="inPressure" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
       <div class="container-input">
         <label class="title-sensor" for="inPeep">PEEP</label>
-        <input type="number" max="7" min="1" id="inPeep" placeholder="0" />
+        <input type="number" max="7" min="0" id="inPeep" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
       <div class="container-input">
         <label class="title-sensor" for="inPeep">Set Timer</label>
-        <input type="number" max="30" min="1" id="setTimer" placeholder="0" />
+        <input type="number" max="15" min="0" id="setTimer" placeholder="0" />
         <p class="unit"><u>Sec</u></p>
       </div>
       <div class="container-input">
@@ -137,7 +137,7 @@
         <div class="container-output-2">
           <button class="reset-button" type="button">
             <div class="title-sensor">
-              <div class="text-reset" id="resetBtn">Reset All</div>
+              <div class="text-reset" onclick="resetFunction()">Reset All</div>
             </div>
           </button>
         </div>

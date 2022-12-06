@@ -3,6 +3,7 @@ const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
   const win = new BrowserWindow({
     resizable: false,
+    icon: "assets/logo_lung-removebg-preview.png",
     // width: 1440,
     // height: 1006,
     show: false,
@@ -18,6 +19,7 @@ const createWindow = () => {
   var splash = new BrowserWindow({
     // width: 1440,
     // height: 1006,
+    icon: "assets/logo_lung-removebg-preview.png",
     fullscreen: true,
     transparent: true,
     frame: false,

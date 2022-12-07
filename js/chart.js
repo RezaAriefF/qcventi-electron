@@ -161,7 +161,6 @@ function resetFunction() {
   document.getElementById("setTimer").value = 0;
 }
 
-
 function update(flowData, pressureData) {
   maxFlowVal = Math.max(...flowData.map((dt) => dt));
   maxFlowVal = Math.ceil(maxFlowVal);
@@ -285,8 +284,7 @@ function chartFunction() {
   if (switchBtn) {
     if (flow == -1 || pressure == -1) {
       alert("PORT NOT READY");
-    }
-    if (inputPressure == 0 || inputPeep == 0) {
+    } else if (inputPressure == 0 || inputPeep == 0) {
       alert("Target and PEEP have not been set");
     } else {
       document.getElementById("pressureBtn").innerHTML = "STOP"; // change button value to stop

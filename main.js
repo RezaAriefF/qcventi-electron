@@ -2,10 +2,10 @@
 const { app, BrowserWindow, dialog } = require("electron");
 const createWindow = () => {
   const win = new BrowserWindow({
-    resizable: false,
+    // resizable: false,
     icon: "assets/logo_lung-removebg-preview.png",
-    // width: 1440,
-    // height: 1006,
+    width: 1920,
+    height: 1080,
     show: false,
     webPreferences: {
       // preload: path.join(__dirname, 'preload.js'),
@@ -17,10 +17,10 @@ const createWindow = () => {
   win.loadFile("index.html");
 
   var splash = new BrowserWindow({
-    // width: 1440,
-    // height: 1006,
+    width: 1920,
+    height: 1080,
     icon: "assets/logo_lung-removebg-preview.png",
-    fullscreen: true,
+    // fullscreen: true,
     transparent: true,
     frame: false,
     alwaysOnTop: true,
@@ -46,7 +46,7 @@ const createWindow = () => {
       e.preventDefault();
     }
   });
-  win.maximize();
+  // win.maximize();
   win.loadFile("index.html");
 };
 

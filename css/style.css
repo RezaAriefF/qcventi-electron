@@ -514,6 +514,14 @@ canvas {
 .title-sensor {
   color: #242a37;
   font-weight: 700;
+  font-size: 15px;
+  justify-content: center;
+  text-align: center;
+}
+
+.title-sensor-output {
+  color: #242a37;
+  font-weight: 700;
   font-size: 20px;
   justify-content: center;
   text-align: center;

@@ -17,16 +17,7 @@ canvas {
   font-size: 0;
   background: transparent;
 }
-/* .sidebar { */
-/* sidebar pas ketutup */
-/* position: fixed;
-  background-color: #5b74a7;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 79px;
-  z-index: 99;
-  transition: all 0.5s ease; */
+
 
 .sidebar {
   /* sidebar pas ketutup */
@@ -71,12 +62,13 @@ canvas {
 .logo-stechoq {
   opacity: 0;
   margin: auto;
-  margin-top: 78px;
+  margin-top: 130px;
   width: 200px; /* ukuran logo stechoq */
   transition: all 0.5s ease;
 }
 .sidebar.open .logo-stechoq {
   opacity: 1;
+  margin-top: 130px;
   pointer-events: auto;
   transition: all 0.5s ease;
 }
@@ -460,7 +452,7 @@ canvas {
 }
 .home-section .container-output-flow {
   width: 100%;
-  height: 206px;
+  height: 27.8vh;
   float: right;
   background: #ffffff;
   box-sizing: border-box;
@@ -472,7 +464,7 @@ canvas {
 
 .home-section .container-output-pressure {
   width: 100%;
-  height: 206px;
+  height: 27.9vh;
   float: right;
   background: #ffffff;
   box-sizing: border-box;
@@ -551,14 +543,14 @@ canvas {
   margin-bottom: 20px;
 }
 
-.container-output-2 .reset-button {
+.container-output-3 .reset-button {
   border: 2px solid #ece1b5;
   background-color: #484b6a;
   cursor: pointer;
   border-radius: 15px;
   width: 65%;
   margin-top: 42px;
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 #pressureBtn {
@@ -705,27 +697,37 @@ input {
   display: flex;
 }
 
-.home-section .container .content .how-to-use {
-  padding-top: 24px;
+.home-section .container .content-how {
+  display: flex;
+  align-items: flex-end;
+}
+
+
+
+.home-section .container .content-how .how-to-use {
+  padding-top: 30px;
   padding-left: 48px;
   padding-right: 50px;
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 26px;
+  font-size: 17px;
+  line-height: 27px;
   color: #242a37;
+  margin-bottom: 3%;
 }
-.home-section .container .content .img-how-to-use {
+.home-section .container .content-how .img-how-to-use {
+  width: 30%;
+  height: 40%;
   padding-right: 2%;
-  /* width: 40%; */
-  /* height: 1%; */
-  margin-top: 220px;
+  padding-top: 29%;
+  /* box-sizing: content-box; */
+  align-items: baseline;
 }
 
-.home-section .container .content .about {
-  position: absolute;
+.home-section .container .content-about .about {
+  align-items: center;
   padding-top: 12%;
-  padding-left: 16%;
+ 
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -734,10 +736,10 @@ input {
   color: #242a37;
 }
 
-.home-section .container .content .img-about {
-  width: 30%;
-  height: 20%;
-  margin-top: 27%;
+.home-section .container .content-about .img-about {
+  width: 25%;
+  height: 15%;
+  margin-top: 10%;
   margin-left: 67%;
   border-bottom-right-radius: 5%;
   background-color: #ffffff;

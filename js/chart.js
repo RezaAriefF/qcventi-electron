@@ -18,8 +18,8 @@ const lowerLimitY = 500; //Minimum Y value
 const xTick = 1000; // X Axis tick
 let dataflow = [];
 let datapressure = [];
-const realWidthInt = 800;
-const realWidth = realWidthInt + "px";
+const realWidthInt = 95;
+const realWidth = realWidthInt + "%";
 const realHeightInt = 330;
 const realHeight = realHeightInt + "px";
 let svgFlow, svgPressure, xAxis, maxValue, y, x;
@@ -60,7 +60,7 @@ function draw() {
     .domain([0, xTick]) //The domain is the complete set of values
     .range([1, 730]); //The range is the set of resulting values of a function / jarak antar X tick
 
-  xAxis = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d));
+  xAxis = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d)/50);
 
   svgFlow
     .append("g")

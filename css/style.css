@@ -551,14 +551,14 @@ canvas {
   margin-bottom: 20px;
 }
 
-.container-output-2 .reset-button {
+.container-output-3 .reset-button {
   border: 2px solid #ece1b5;
   background-color: #484b6a;
   cursor: pointer;
   border-radius: 15px;
   width: 65%;
   margin-top: 42px;
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 #pressureBtn {

@@ -21,6 +21,7 @@ const createWindow = () => {
     height: 1080,
     icon: "assets/logo_lung-removebg-preview.png",
     // fullscreen: true,
+    center: true,
     transparent: true,
     frame: false,
     alwaysOnTop: true,

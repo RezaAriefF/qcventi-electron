@@ -60,7 +60,7 @@ function draw() {
     .domain([0, xTick]) //The domain is the complete set of values
     .range([1, 730]); //The range is the set of resulting values of a function / jarak antar X tick
 
-  xAxis = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d)/50);
+  xAxis = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d) / 50);
 
   svgFlow
     .append("g")
@@ -283,25 +283,24 @@ function chartFunction() {
 
   if (switchBtn) {
     if (flow == -1 || pressure == -1) {
+      //port not connected
       alert("PORT NOT READY");
     } else if (inputPressure == 0 || inputPeep == 0) {
+      //port connected
       alert("Target and PEEP have not been set");
     } else {
+      // port connected and target and PEEP have been set
       document.getElementById("pressureBtn").innerHTML = "STOP"; // change button value to stop
       btnVal = "*START";
-      port.write(btnVal);
-      port.write("$");
-      port.write(inputPressure);
-      port.write("$");
-      port.write(inputPeep);
+      port.write(btnVal); //send data START to Arduino
+      port.write("$"); //delimiter from Arduino
+      port.write(inputPressure); //data pressure
+      port.write("$"); //delimiter from Arduino
+      port.write(inputPeep); //data peep
       port.write("#");
       loop();
     }
   } else {
-    // document.getElementById("sPressure").innerHTML = 0;
-    // document.getElementById("sFlow").innerHTML = 0;
-    // document.getElementById("inPressure").innerHTML = 0;
-    // document.getElementById("inPeep").innerHTML = 0;
     document.getElementById("pressureBtn").innerHTML = "START"; // change button value to start
     btnVal = "*STOP";
     port.write(btnVal);

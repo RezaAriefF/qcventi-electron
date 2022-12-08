@@ -17,11 +17,11 @@
 </head>
 
 <body>
+  <!-- Sidebar -->
   <div class="sidebar">
     <div class="sidebar-top">
       <div class="logo-details">
         <img class="logo-oxyzen" title="logo-oxyzen" src="assets/logo_oxyzen.png" />
-        <!-- <div class="logo_name">Oxyzen</div> -->
         <i class="logo fas fa-bars" id="btn"></i>
       </div>
     </div>
@@ -58,14 +58,12 @@
       </ul>
     </div>
     <div class="sidebar-footer">
-      <!-- <div class="logo-details break">
-        <img class="logo-lung" title="logo-lung" src="assets/logo_lung-removebg-preview.png" />
-      </div> -->
       <div class="logo-details">
         <img class="logo-stechoq" title="logo-stechoq" src="assets/logo_stechoq.png" />
       </div>
     </div>
   </div>
+  <!-- End of Sidebar -->
   <section class="home-section">
     <div class="text">QUALITY CONTROL VENTILATOR</div>
     <!-- <img src="assets/logo_stechoq.png" class="stechoq" /> -->
@@ -75,7 +73,7 @@
       <div class="flow">
         <div class="container-chart">
           <a class="title">Flow Sensor</a>
-          <div id="flowGraph"></div>
+          <div id="flowGraph"></div> //Chart Flow
           <!-- <div id="chartFlow"></div> -->
           <!-- <canvas id="chartFlow" width="700" height="200"></canvas> -->
           <a class="unit">L/min</a>
@@ -118,21 +116,31 @@
       <!-- end of Flow Area -->
 
       <!-- Sensor Input -->
+      <!-- Pressure Target Container -->
       <div class="container-input">
         <label class="title-sensor" for="inPressure">Pressure Target</label>
         <input type="number" max="500" min="0" id="inPressure" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
+      <!-- end of Pressure Target Container -->
+
+      <!-- PEEP Container -->
       <div class="container-input">
         <label class="title-sensor" for="inPeep">PEEP</label>
         <input type="number" max="7" min="0" id="inPeep" placeholder="0" />
         <p class="unit"><u>mbar</u></p>
       </div>
+      <!-- end of PEEP Container -->
+
+      <!-- Timer Container -->
       <div class="container-input">
         <label class="title-sensor" for="inPeep">Set Timer</label>
         <input type="number" max="15" min="0" id="setTimer" placeholder="0" />
         <p class="unit"><u>Sec</u></p>
       </div>
+      <!-- end of Timer Container -->
+
+      <!-- Reset Container -->
       <div class="container-input">
         <label class="title-sensor" for="optionInput">Option Input</label>
         <div class="container-output-3">
@@ -143,6 +151,7 @@
           </button>
         </div>
       </div>
+      <!-- end of Reset Container -->
       <!-- end Sensor Input -->
 
       <!-- Start Button -->
@@ -153,7 +162,6 @@
           </div>
         </button>
       </div>
-
       <!-- end of Start Button -->
 
       <!-- Pressure Sensor -->
@@ -174,16 +182,11 @@
   </section>
   <script src="js/sidebar.js"></script>
   <script src="js/c3.js"></script>
-  <script src="js/chart.js"></script>
+  <script src="js/chart.js"></script> <!-- Chart function -->
   <script src="js/c3.min.js"></script>
-  <script src="js/d3.v5.min.js"></script>
+  <script src="js/d3.v5.min.js"></script> <!-- Chart flow and Pressure -->
   <script src="renderer.js"></script>
   <script src="js/darkmode.js"></script>
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
-  <script src="js/chart-ecg.js"></script> -->
-  <!-- <script src="js/get-serial.js"></script> -->
-  <!-- <script src="renderer.js"></script> -->
-
 
 </body>
 

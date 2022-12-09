@@ -586,6 +586,7 @@ canvas {
   font-style: normal;
   font-weight: 500;
   font-size: 100px;
+  width: 130px;
 }
 .flow {
   color: #85e426;
@@ -610,6 +611,7 @@ canvas {
 
 .unit-flow {
   color: #1d1b31;
+  
   font-size: 24px;
   padding-top: 8px;
   padding-right: 20px;
@@ -619,6 +621,7 @@ canvas {
 
 .unit-pres {
   color: #1d1b31;
+  
   font-size: 24px;
   padding-top: 8px;
   padding-right: 20px;
@@ -628,6 +631,7 @@ canvas {
 
 .sensor-output .unit-output {
   font-weight: 700;
+  align-items: flex-end;
   font-size: 30px;
   text-decoration-line: underline;
   padding-top: 35px;

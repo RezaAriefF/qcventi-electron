@@ -1,20 +1,20 @@
 {
+
   "name": "qcventilator",
   "version": "1.0.0",
   "license": "ISC",
   "description": "Quality Control Ventilator",
-  "author": "oxyzenteamventi@gmail.com",
+  "publisher": "Oxyzen-Team",
   "main": "main.js",
   "scripts": {
-    "postinstall": "install-app-deps",
-    "start": "npm install && electron .",
-    "build": "electron-builder",
-    "pack": "build --dir",
-    "dist": "build"
+    "start": "electron .",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "build": "electron-builder"
   },
   "build": {
     "appId": "QC-Ventilator",
-    "category": "qcventilator.medical.tools",
+
     "win": {
       "target": [
         "nsis"
@@ -24,14 +24,14 @@
     "nsis": {
       "oneClick": false,
       "installerIcon": "iconqc.ico",
+      "icon": "iconqc.ico",
       "uninstallerIcon": "iconqc.ico",
       "uninstallDisplayName": "QCVenti-Uninstaller",
       "license": "license.md",
-      "createStartMenuShortcut": true,
       "allowToChangeInstallationDirectory": true
     }
   },
-
+  "author": "Oxyzen-Team",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.4",
     "@electron-forge/maker-deb": "^6.0.4",

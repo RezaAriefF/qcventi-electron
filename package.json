@@ -7,6 +7,7 @@
   "publisher": "Oxyzen-Team",
   "main": "main.js",
   "scripts": {
+   
     "start": "electron .",
     "package": "electron-forge package",
     "make": "electron-forge make",

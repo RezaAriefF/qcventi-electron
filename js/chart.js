@@ -2,7 +2,7 @@
 const { parse } = require("path"); //detect port
 const SerialPort = require("serialport").SerialPort; //lib serialport(npm)
 const { ReadlineParser } = require("@serialport/parser-readline"); //read serialport
-const port = new SerialPort({ baudRate: 9600, path: "COM10" }); //define port;
+const port = new SerialPort({ baudRate: 9600, path: "COM9" }); //define port;
 
 const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" })); //parsing (memisahkan data)
 
@@ -12,9 +12,8 @@ let flow = -1, //define flow and pressure (int)
   pressure2 = -1;
 let btnVal = ""; // define button as string
 
-const lowerLimitY = 500; //Minimum Y value
-// const xSecond = 8   //X Axis
-// const xTick = xSecond * Math.floor(Math.random() * 100);
+const limitYF = 10; //Minimum Y value
+const limitYP = 400;
 const xTick = 1000; // X Axis tick
 let dataflow = [];
 let datapressure = [];
@@ -22,7 +21,7 @@ const realWidthInt = 95;
 const realWidth = realWidthInt + "%";
 const realHeightInt = 330;
 const realHeight = realHeightInt + "px";
-let svgFlow, svgPressure, xAxis, maxValue, y, x;
+let svgFlow, svgPressure, xflow, xpressure, x, x1, yflow, ypressure;
 let currentIndex = 0;
 
 parser.on("data", (line) => {
@@ -54,18 +53,25 @@ function draw() {
     .attr("width", realWidth) //lebar
     .attr("height", realHeight) //tinggi
     .append("g"); //svg element
+
   // draw x axis
   x = d3
     .scaleLinear()
     .domain([0, xTick]) //The domain is the complete set of values
     .range([1, 730]); //The range is the set of resulting values of a function / jarak antar X tick
 
-  xAxis = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d) / 50);
+  x1 = d3
+    .scaleLinear()
+    .domain([0, xTick]) //The domain is the complete set of values
+    .range([1, 730]); //The range is the set of resulting values of a function / jarak antar X tick
+
+  xflow = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d) / 50);
+  xpressure = d3.axisBottom(x1).tickFormat((e, j) => Math.ceil(e) / 50);
 
   svgFlow
     .append("g")
     .attr("transform", "translate(50, 280)")
-    .call(xAxis)
+    .call(xflow)
     .selectAll("text")
     .attr("transform", "translate(0,0)")
     .style("text-anchor", "center");
@@ -73,31 +79,39 @@ function draw() {
   svgPressure
     .append("g")
     .attr("transform", "translate(50, 280)")
-    .call(xAxis)
+    .call(xpressure)
     .selectAll("text")
     .attr("transform", "translate(0,0)")
     .style("text-anchor", "center");
 
   // draw y axis
-  maxValue = Math.max(...dataflow);
-  maxValue = Math.ceil(maxValue); //Math.ceil(0.9) == 1 , Math.ceil(12.5) == 12
+  flowVal = Math.max(...dataflow);
+  flowVal = Math.ceil(flowVal); //Math.ceil(0.9) == 1 , Math.ceil(12.5) == 12
 
-  y = d3
+  presVal = Math.max(...datapressure);
+  presVal = Math.ceil(presVal); //Math.ceil(0.9) == 1 , Math.ceil(12.5) == 12
+
+  yflow = d3
     .scaleLinear()
-    .domain([maxValue < lowerLimitY ? lowerLimitY : maxValue, 0])
+    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dinamic flow
+    .range([0, 280]);
+
+  ypressure = d3
+    .scaleLinear()
+    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dinamic pressure
     .range([0, 280]);
 
   svgFlow
     .append("g")
     .attr("transform", "translate(50, 0)")
     .attr("class", "flowGraph-yAxis")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(yflow));
 
   svgPressure
     .append("g")
     .attr("transform", "translate(50, 0)")
     .attr("class", "pressureGraph-yAxis")
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(ypressure));
 
   // draw line
   svgFlow
@@ -113,7 +127,7 @@ function draw() {
       d3
         .line()
         .x((d, i) => x(i))
-        .y((d) => y(d || 0))
+        .y((d) => yflow(d || 0))
     );
 
   svgPressure
@@ -128,8 +142,8 @@ function draw() {
       "d",
       d3
         .line()
-        .x((d, i) => x(i))
-        .y((d) => y(d || 0))
+        .x((e, j) => x1(j))
+        .y((e) => ypressure(e || 0))
     );
 
   // draw bar
@@ -138,7 +152,7 @@ function draw() {
     .attr("class", "flowGraph-rect")
     .attr("transform", "translate(50,0)")
     .attr("x", (d, i) => x(i))
-    .attr("y", -1)
+    .attr("y", 0)
     .attr("fill", "#FFFFFF")
     .attr("width", 10)
     .attr("height", realHeightInt - 50);
@@ -147,8 +161,8 @@ function draw() {
     .append("rect")
     .attr("class", "pressureGraph-rect")
     .attr("transform", "translate(50,0)")
-    .attr("x", (d, i) => x(i))
-    .attr("y", -1)
+    .attr("x", (e, j) => x(j))
+    .attr("y", 0)
     .attr("fill", "#FFFFFF")
     .attr("width", 10)
     .attr("height", realHeightInt - 50);
@@ -156,39 +170,42 @@ function draw() {
 
 // fungsi button reset
 function resetFunction() {
-  document.getElementById("inPressure").value = 0;
-  document.getElementById("inPeep").value = 0;
-  document.getElementById("setTimer").value = 0;
+  tombol = document.getElementById("pressureBtn").innerHTML;
+  if (tombol == "START") {
+    document.getElementById("inPressure").value = 0;
+    document.getElementById("inPeep").value = 0;
+    document.getElementById("setTimer").value = 0;
+  }
 }
 
 function update(flowData, pressureData) {
-  maxFlowVal = Math.max(...flowData.map((dt) => dt));
-  maxFlowVal = Math.ceil(maxFlowVal);
+  flowVal = Math.max(...flowData.map((dt) => dt));
+  flowVal = Math.ceil(flowVal);
 
-  maxPressureVal = Math.max(...pressureData.map((dt) => dt));
-  maxPressureVal = Math.ceil(maxPressureVal);
+  presVal = Math.max(...pressureData.map((dtt) => dtt));
+  presVal = Math.ceil(presVal);
 
-  yFlow = d3
+  yflow = d3
     .scaleLinear()
-    .domain([maxFlowVal < lowerLimitY ? lowerLimitY : maxFlowVal, 0])
+    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dinamic flow
     .range([0, 280]);
 
-  yPressure = d3
+  ypressure = d3
     .scaleLinear()
-    .domain([maxPressureVal < lowerLimitY ? lowerLimitY : maxPressureVal, 0])
+    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dinamic pressure
     .range([0, 280]);
 
   svgFlow
     .select(".flowGraph-yAxis")
     .transition()
     .duration(0.03)
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(yflow));
 
   svgPressure
     .select(".pressureGraph-yAxis")
     .transition()
     .duration(0.03)
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(ypressure));
 
   // update line data
   var pathFlow = d3.select(".flowGraph-lineTest").datum(flowData);
@@ -197,6 +214,7 @@ function update(flowData, pressureData) {
   // enter selection on line
   pathFlow.enter().append("path");
   pathPressure.enter().append("path");
+
   // update selection on line
   pathFlow
     .transition()
@@ -206,8 +224,9 @@ function update(flowData, pressureData) {
       d3
         .line()
         .x((d, i) => x(i))
-        .y((d) => y(d || 0))
+        .y((d) => yflow(d || 0))
     );
+
   pathPressure
     .transition()
     .duration(1)
@@ -215,8 +234,8 @@ function update(flowData, pressureData) {
       "d",
       d3
         .line()
-        .x((d, i) => x(i))
-        .y((d) => y(d || 0))
+        .x((e, j) => x1(j))
+        .y((e) => ypressure(e || 0))
     );
   // exit selection on line
   pathFlow.exit().remove();
@@ -232,7 +251,7 @@ function update(flowData, pressureData) {
 
   // update selection on line
   barFlow.transition().duration(1).attr("x", x(currentIndex));
-  barPressure.transition().duration(1).attr("x", x(currentIndex));
+  barPressure.transition().duration(1).attr("x", x1(currentIndex));
 
   // exit selection on line
   barFlow.exit().remove();
@@ -307,124 +326,3 @@ function chartFunction() {
     port.write("#");
   }
 }
-
-// const dayjs = require("./class/day"); //lib day js
-// const { platform } = require("os");
-
-// const timeNow = () => dayjs().format("YYYY-MM-DD HH:mm:ss.SSS"); //format time now
-// const timeTail = () =>
-//   dayjs().subtract(10, "s").format("YYYY-MM-DD HH:mm:ss.SSS"); //number of times displayed
-// //src : https://codepen.io/nagitch/pen/rNMrXNw
-// const chartAxis = {
-//   x: {
-//     type: "timeseries",
-//     min: timeTail(),
-//     max: timeNow(),
-//     tick: {
-//       fit: false,
-//       rotate: -50,
-//       format: "%S",
-//     },
-//   },
-// };
-
-// const chartDataPressure = {
-//   // type: "spline",
-//   x: "x",
-//   xFormat: "%Y-%m-%d %H:%M:%S.%L",
-//   columns: [["x"], ["Pressure"]],
-//   colors: {
-//     Pressure: "#24D4EC",
-//   },
-// };
-
-// let chartPressure = c3.generate({
-//   bindto: "#chartPressure",
-//   data: chartDataPressure,
-//   axis: chartAxis,
-// });
-
-// const chartDataFlow = {
-//   // type: "spline",
-//   x: "x",
-//   xFormat: "%Y-%m-%d %H:%M:%S.%L", // format millisecond
-//   columns: [["x"], ["Flow"]],
-//   colors: {
-//     Flow: "#85E426",
-//   },
-// };
-
-// let chartFlow = c3.generate({
-//   bindto: "#chartFlow",
-//   data: chartDataFlow,
-//   axis: chartAxis,
-// });
-
-// parser.on("data", (line) => {
-//   try {
-//     const json = JSON.parse(line); //get data from json
-//     // ping = json.ping; //set ping from arduino
-//     pressure = json.pressure; //define pressure to json
-//     flow = json.flow; //define flow to json
-//   } catch (e) {
-//     //if error
-//     console.log(e);
-//   }
-// });
-
-// function chartFunction() {
-//   switchBtn = !switchBtn;
-//   let inputPressure = document.getElementById("inPressure").value;
-//   let inputPeep = document.getElementById("inPeep").value;
-
-//   if (switchBtn) {
-//     if (flow == -1 || pressure == -1) {
-//       alert("PORT NOT READY");
-//     }
-//     if (inputPressure == 0 || inputPeep == 0) {
-//       alert("Target and PEEP have not been set");
-//     } else {
-//       document.getElementById("pressureBtn").innerHTML = "STOP"; // change button value to stop
-//       btnVal = "*START";
-//       port.write(btnVal);
-//       port.write("$");
-//       port.write(inputPressure);
-//       port.write("$");
-//       port.write(inputPeep);
-//       port.write("#");
-
-//       // drawWave();
-
-//       intervalId = setInterval(() => {
-//         // PRESSURE
-//         // redraw time series axis in every second
-//         chartPressure.axis.min({ x: timeTail() });
-//         chartPressure.axis.max({ x: timeNow() });
-
-//         chartDataPressure.columns[0].push(timeNow());
-//         chartDataPressure.columns[1].push(pressure);
-
-//         chartPressure.load({ columns: chartDataPressure.columns });
-//         // FLOW
-//         chartFlow.axis.min({ x: timeTail() });
-//         chartFlow.axis.max({ x: timeNow() });
-
-//         chartDataFlow.columns[0].push(timeNow());
-//         chartDataFlow.columns[1].push(flow);
-
-//         chartFlow.load({ columns: chartDataFlow.columns });
-//         document.getElementById("sPressure").innerHTML = pressure.toFixed(2); //send pressure value to sPressure
-//         document.getElementById("sFlow").innerHTML = flow.toFixed(2); //send flow value to sFlow
-//       }, 30);
-//     }
-//   } else {
-//     clearInterval(intervalId); //reset interval
-//     document.getElementById("pressureBtn").innerHTML = "START"; // change button value to start
-//     btnVal = "*STOP";
-//     port.write(btnVal);
-//     port.write("#");
-//     // drawWave();
-//     document.getElementById("sPressure").innerHTML = 0;
-//     document.getElementById("sFlow").innerHTML = 0;
-//   }
-// }

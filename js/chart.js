@@ -2,7 +2,7 @@
 const { parse } = require("path"); //detect port
 const SerialPort = require("serialport").SerialPort; //lib serialport(npm)
 const { ReadlineParser } = require("@serialport/parser-readline"); //read serialport
-const port = new SerialPort({ baudRate: 9600, path: "COM9" }); //define port;
+const port = new SerialPort({ baudRate: 9600, path: "COM10" }); //define port;
 
 const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" })); //parsing (memisahkan data)
 

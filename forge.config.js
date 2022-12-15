@@ -1,6 +1,7 @@
 module.exports = {
   packagerConfig: {
     icon: 'build/icon',
+    DisplayIcon: "build/icon",
     installerIcon: "build/icon",
     uninstallerIcon: "build/icon",
     uninstallDisplayName: "QCVenti-Uninstaller 1.00",

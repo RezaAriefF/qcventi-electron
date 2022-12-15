@@ -48,6 +48,8 @@
 
       "installerIcon": "build/iconqc.ico",
 
+      "DisplayIcon": "build/iconqc.ico",
+
       "uninstallerIcon": "build/iconqc.ico",
 
       "uninstallDisplayName": "QCVenti-Uninstaller 1.00",

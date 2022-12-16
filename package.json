@@ -1,52 +1,100 @@
 {
 
   "name": "qcventilator",
+
   "version": "1.0.0",
+
   "license": "ISC",
+
   "description": "Quality Control Ventilator",
+
   "publisher": "Oxyzen-Team",
+
   "main": "main.js",
+
   "scripts": {
-   
+
     "start": "electron .",
+
     "package": "electron-forge package",
+
     "make": "electron-forge make",
+
     "build": "electron-builder"
+
   },
+
   "build": {
-    "appId": "QC-Ventilator",
+
+    "appId": "com.oxyzen.qcventilator",
 
     "win": {
+
       "target": [
+
         "nsis"
+
       ],
-      "icon": "iconqc.ico"
+
+      "icon": "build/iconqc.ico"
+
     },
+
     "nsis": {
+
       "oneClick": false,
-      "installerIcon": "iconqc.ico",
-      "icon": "iconqc.ico",
-      "uninstallerIcon": "iconqc.ico",
-      "uninstallDisplayName": "QCVenti-Uninstaller",
+
+      "perMachine": false,
+
+      "installerIcon": "build/iconqc.ico",
+
+      "DisplayIcon": "build/iconqc.ico",
+
+      "uninstallerIcon": "build/iconqc.ico",
+
+      "uninstallDisplayName": "QCVenti-Uninstaller 1.00",
+
       "license": "license.md",
+
       "allowToChangeInstallationDirectory": true
+
     }
+
   },
+
   "author": "Oxyzen-Team",
+
   "devDependencies": {
+
     "@electron-forge/cli": "^6.0.4",
+
     "@electron-forge/maker-deb": "^6.0.4",
+
     "@electron-forge/maker-rpm": "^6.0.4",
+
     "@electron-forge/maker-squirrel": "^6.0.4",
+
     "@electron-forge/maker-zip": "^6.0.4",
+
     "electron": "^21.3.3",
-    "electron-builder": "^23.6.0"
+
+    "electron-builder": "^23.6.0",
+
+    "electron-packager": "^17.1.1"
+
   },
+
   "dependencies": {
+
     "electron-alert": "^0.1.20",
-    "electron-squirrel-startup": "^1.0.0",
+
     "jquery": "^3.6.1",
+
     "serialport": "^10.4.0",
+
     "sweetalert2": "^11.6.15"
+
   }
+
 }
+

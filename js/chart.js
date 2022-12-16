@@ -2,7 +2,7 @@
 const { parse } = require("path"); //detect port
 const SerialPort = require("serialport").SerialPort; //lib serialport(npm)
 const { ReadlineParser } = require("@serialport/parser-readline"); //read serialport
-const port = new SerialPort({ baudRate: 9600, path: "COM10" }); //define port;
+const port = new SerialPort({ baudRate: 9600, path: "COM3" }); //define port;
 
 const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" })); //parsing (memisahkan data)
 
@@ -280,7 +280,7 @@ function loop() {
   let interval = setInterval(() => {
     currentIndex++;
     dataflow.splice(currentIndex % xTick, 1, flow);
-    document.getElementById("sFlow").innerHTML = flow;
+    document.getElementById("sFlow").innerHTML = flow.toFixed(1);
     if (isChecked) {
       datapressure.splice(currentIndex % xTick, 1, pressure2);
       document.getElementById("sPressure").innerHTML = pressure2;
@@ -304,13 +304,14 @@ function chartFunction() {
   switchBtn = !switchBtn;
   let inputPressure = document.getElementById("inPressure").value;
   let inputPeep = document.getElementById("inPeep").value;
+  let inputTimer = document.getElementById("setTimer").value;
 
   if (switchBtn) {
     if (flow == -1 || pressure == -1) {
       //port not connected
       alert("PORT NOT READY");
     } else if (inputPressure == 0 || inputPeep == 0) {
-      //port connected
+      //port connected but input have not been set
       alert("Target and PEEP have not been set");
     } else {
       // port connected and target and PEEP have been set
@@ -319,8 +320,10 @@ function chartFunction() {
       port.write(btnVal); //send data START to Arduino
       port.write("$"); //delimiter from Arduino
       port.write(inputPressure); //data pressure
+      // port.write("$"); //delimiter from Arduino
+      // port.write(inputPeep); //data peep
       port.write("$"); //delimiter from Arduino
-      port.write(inputPeep); //data peep
+      port.write(inputTimer); //data Set Timer
       port.write("#");
       loop();
     }

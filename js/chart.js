@@ -24,6 +24,7 @@ const realHeight = realHeightInt + "px";
 let svgFlow, svgPressure, xflow, xpressure, x, x1, yflow, ypressure;
 let currentIndex = 0;
 
+// GET DATA FROM ARDUINO USING arduinoJSON.h
 parser.on("data", (line) => {
   try {
     const json = JSON.parse(line); //get data from json
@@ -36,11 +37,12 @@ parser.on("data", (line) => {
   }
 });
 
+// MAKE CHART
 function draw() {
   // draw svg
   svgFlow = d3
-    .select(`#flowGraph`)
-    .append("svg")
+    .select(`#flowGraph`) //ID
+    .append("svg") //svg-class
     .attr("id", `flowGraph-svg`)
     .attr("width", realWidth) //lebar
     .attr("height", realHeight) //tinggi
@@ -62,7 +64,7 @@ function draw() {
 
   x1 = d3
     .scaleLinear()
-    .domain([0, xTick]) //The domain is the complete set of values
+    .domain([0, xTick]) //The domain is the complete set of values / banyak tick
     .range([1, 730]); //The range is the set of resulting values of a function / jarak antar X tick
 
   xflow = d3.axisBottom(x).tickFormat((d, i) => Math.ceil(d) / 50);
@@ -93,12 +95,12 @@ function draw() {
 
   yflow = d3
     .scaleLinear()
-    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dinamic flow
+    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dynamic flow
     .range([0, 280]);
 
   ypressure = d3
     .scaleLinear()
-    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dinamic pressure
+    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dynamic pressure
     .range([0, 280]);
 
   svgFlow
@@ -178,6 +180,7 @@ function resetFunction() {
   }
 }
 
+//UPDATE DATA
 function update(flowData, pressureData) {
   flowVal = Math.max(...flowData.map((dt) => dt));
   flowVal = Math.ceil(flowVal);
@@ -187,12 +190,12 @@ function update(flowData, pressureData) {
 
   yflow = d3
     .scaleLinear()
-    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dinamic flow
+    .domain([flowVal < limitYF ? limitYF : flowVal, 0]) //dynamic flow
     .range([0, 280]);
 
   ypressure = d3
     .scaleLinear()
-    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dinamic pressure
+    .domain([presVal < limitYP ? limitYP : presVal, 0]) //dynamic pressure
     .range([0, 280]);
 
   svgFlow
@@ -260,6 +263,7 @@ function update(flowData, pressureData) {
 
 var isChecked = false;
 
+//SLIDER BUTTON PRESSURE
 function slideBtn() {
   isChecked = !isChecked;
   currentIndex = 0;
@@ -290,11 +294,12 @@ function loop() {
       currentIndex = 0;
     }
     if (btnVal == "*STOP") {
-      clearInterval(interval);
+      clearInterval(interval); //STOP interval LOOP
     }
   }, 20);
 }
-draw();
+draw(); // DRAW GRAPH
+// START BUTTON
 function chartFunction() {
   switchBtn = !switchBtn;
   let inputPressure = document.getElementById("inPressure").value;

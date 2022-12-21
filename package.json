@@ -1,6 +1,8 @@
 {
 
-  "name": "qcventilator",
+  "name": "qcventiapp",
+
+  "icon": "build/iconqc",
 
   "version": "1.0.0",
 

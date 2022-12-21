@@ -13,6 +13,9 @@ module.exports = {
         // The ICO file to use as the icon for the generated Setup.exe
         setupIcon: 'build/iconqc.ico',
 
+        DisplayIcon: 'build/iconqc.ico',
+        
+
       },
       
     },
@@ -23,6 +26,10 @@ module.exports = {
         icon: 'build/iconqc.ico',
         // The ICO file to use as the icon for the generated Setup.exe
         setupIcon: 'build/iconqc.ico',
+
+        iconUrl: 'build/iconqc.ico',
+
+        DisplayIcon: 'build/iconqc.ico',
 
       },
       
